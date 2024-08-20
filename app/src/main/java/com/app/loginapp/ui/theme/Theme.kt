@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 private val AppColors = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
-    tertiary = Pink80
+    tertiary = Pink
 )
 
 @Composable
