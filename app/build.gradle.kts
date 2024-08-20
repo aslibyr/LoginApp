@@ -54,6 +54,7 @@ android {
 dependencies {
     // hilt
     implementation(libs.hilt.android)
+    implementation(libs.androidx.lifecycle.runtime.compose.android)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
