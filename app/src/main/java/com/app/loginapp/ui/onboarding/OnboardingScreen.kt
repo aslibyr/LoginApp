@@ -1,4 +1,4 @@
-package com.app.loginapp.ui.ui.onboarding
+package com.app.loginapp.ui.onboarding
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
@@ -21,9 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.app.loginapp.ui.components.button.CustomButton
-import com.app.loginapp.ui.components.indicator.PagerIndicator
-import com.app.loginapp.ui.ui.onboarding.pagerutils.PagerModel
+import com.app.loginapp.components.button.CustomButton
+import com.app.loginapp.components.indicator.PagerIndicator
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)

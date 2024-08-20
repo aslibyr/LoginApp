@@ -1,13 +1,9 @@
-package com.app.loginapp.ui.theme
+package com.app.loginapp.theme
 
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink = Color(0xFFEFB8C8)
-val Yellow = Color(0xFFe68600)
 val Purple = Color(0xFF6B07F7)
 val Black = Color(0xFF000000)
-
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)

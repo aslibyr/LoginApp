@@ -1,4 +1,4 @@
-package com.app.loginapp.ui.theme
+package com.app.loginapp.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme

@@ -1,4 +1,4 @@
-package com.app.loginapp.ui.components.indicator
+package com.app.loginapp.components.indicator
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background

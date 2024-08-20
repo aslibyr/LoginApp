@@ -1,4 +1,4 @@
-package com.app.loginapp.ui.ui.onboarding.pagerutils
+package com.app.loginapp.ui.onboarding
 
 fun getPagerList(): List<PagerModel> {
     return listOf(
