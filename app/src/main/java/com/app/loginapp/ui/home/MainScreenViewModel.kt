@@ -11,33 +11,33 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeScreenViewModel @Inject constructor() : ViewModel() {
+class MainScreenViewModel @Inject constructor() : ViewModel() {
 
-    private val _uiState = MutableStateFlow(HomeScreenUIStateModel())
-    val uiState: StateFlow<HomeScreenUIStateModel>
+    private val _uiState = MutableStateFlow(MainScreenUIStateModel())
+    val uiState: StateFlow<MainScreenUIStateModel>
         get() = _uiState.stateIn(
             viewModelScope,
-            SharingStarted.Eagerly, HomeScreenUIStateModel()
+            SharingStarted.Eagerly, MainScreenUIStateModel()
         )
 
-    fun updateUIEvents(event: HomeScreenUIEvents) {
+    fun updateUIEvents(event: MainScreenUIEvents) {
         when (event) {
-            is HomeScreenUIEvents.UpdatePassword -> {
+            is MainScreenUIEvents.UpdatePassword -> {
                 _uiState.value = _uiState.value.copy(password = event.password)
             }
 
-            is HomeScreenUIEvents.ChangeScreenType -> {
+            is MainScreenUIEvents.ChangeScreenType -> {
                 if (event.screenType == ScreenType.ONBOARDING) {
                     _uiState.value = _uiState.value.copy(email = "", password = "")
                 }
                 _uiState.value = _uiState.value.copy(screenType = event.screenType)
             }
 
-            is HomeScreenUIEvents.UpdateEmail -> {
+            is MainScreenUIEvents.UpdateEmail -> {
                 _uiState.value = _uiState.value.copy(email = event.email)
             }
 
-            HomeScreenUIEvents.OnLoginClicked -> {
+            MainScreenUIEvents.OnLoginClicked -> {
                 checkValidationForLogin()
             }
         }
@@ -68,7 +68,6 @@ class HomeScreenViewModel @Inject constructor() : ViewModel() {
             passwordValidation,
         ).any {
             !it.isNullOrEmpty()
-
         }
         if (hasError) {
             _uiState.value =
@@ -80,6 +79,5 @@ class HomeScreenViewModel @Inject constructor() : ViewModel() {
             passwordError = null,
             screenType = ScreenType.SUCCESS
         )
-
     }
 }
