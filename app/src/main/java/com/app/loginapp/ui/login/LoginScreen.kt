@@ -4,9 +4,11 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,20 +18,28 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.app.loginapp.R
 import com.app.loginapp.components.button.CustomButton
 import com.app.loginapp.components.textfield.CustomTextField
+import com.app.loginapp.theme.Purple
 import kotlinx.coroutines.delay
 
 @Composable
@@ -58,10 +68,24 @@ fun LoginScreen(
     }
     Column(
         modifier
-            .fillMaxSize()
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Spacer(modifier = Modifier.fillMaxHeight(0.3f))
-
+        Image(
+            painterResource(id = R.drawable.illustration_login),
+            contentDescription = null,
+            modifier
+                .fillMaxHeight(0.25f)
+                .padding(horizontal = 32.dp)
+                .padding(top = 32.dp),
+        )
+        Text(
+            text = "Haydi, Başlayalım!",
+            fontWeight = FontWeight.W900,
+            fontSize = 20.sp,
+            modifier = Modifier.padding(16.dp)
+        )
         AnimatedVisibility(
             visible = isLoaded,
             enter = slideInVertically(
@@ -83,7 +107,7 @@ fun LoginScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
-                        .padding(top = 32.dp),
+                        .padding(top = 16.dp),
                     label = "Email",
                     text = email,
                     returnText = { input ->
@@ -118,6 +142,30 @@ fun LoginScreen(
                 CustomButton(modifier.padding(horizontal = 16.dp), onClick = {
                     onLoginClicked.invoke()
                 }, buttonText = "Giriş yap")
+
+                Row(
+                    modifier
+                        .padding(10.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.Bottom
+                ) {
+                    Text(
+                        text = "Hesabın yok mu? ",
+                        color = Color.Gray,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Normal,
+                    )
+
+                    Text(
+                        text = "Hesap Oluştur",
+                        color = Purple,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                    )
+                }
             }
         }
     }

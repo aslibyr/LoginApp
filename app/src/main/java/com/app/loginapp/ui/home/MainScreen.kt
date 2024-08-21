@@ -43,7 +43,7 @@ fun MainScreen(modifier: Modifier = Modifier, viewModel: MainScreenViewModel = h
         AnimatedVisibility(visible = uiState.screenType == ScreenType.ONBOARDING) {
             OnboardingScreen(
                 pagerState = pagerState,
-                pagerList = uiState.pagerList.map { PagerModel(it.text) },
+                pagerList = uiState.pagerList.map { PagerModel(it.text, it.image) },
                 onSkipClicked = {
                     viewModel.updateUIEvents(
                         event = MainScreenUIEvents.ChangeScreenType(
@@ -52,7 +52,6 @@ fun MainScreen(modifier: Modifier = Modifier, viewModel: MainScreenViewModel = h
                     )
                 },
             )
-
         }
         AnimatedVisibility(visible = uiState.screenType == ScreenType.LOGIN) {
             LoginScreen(

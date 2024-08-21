@@ -1,6 +1,7 @@
 package com.app.loginapp.ui.onboarding
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -36,9 +38,7 @@ fun OnboardingScreen(
 
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
+            .fillMaxSize(),
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -53,14 +53,30 @@ fun OnboardingScreen(
                 userScrollEnabled = false
             ) { index ->
                 val currentItem = pagerList[index]
-                Text(
-                    text = currentItem.text,
-                    color = Color.White,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Image(
+                        painter = painterResource(id = currentItem.image),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxWidth()
+                            .fillMaxHeight(0.8f)
+                    )
+                    Text(
+                        text = currentItem.text,
+                        color = Color.White,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    )
+                }
             }
 
             Box(
@@ -80,7 +96,7 @@ fun OnboardingScreen(
                 buttonText = "Geç",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(horizontal = 16.dp),
                 onClick = {
                     if (pagerState.currentPage == pagerState.pageCount.minus(1)) {
                         onSkipClicked()

@@ -82,7 +82,7 @@ fun BoxScope.SkipButton(
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                contentDescription = "Scroll to Top",
+                contentDescription = "",
                 modifier = Modifier
                     .size(32.dp),
                 tint = Color.White
