@@ -12,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -28,7 +27,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainScreen(modifier: Modifier = Modifier, viewModel: MainScreenViewModel = hiltViewModel()) {
-    val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
     val pagerList = listOf(
@@ -92,10 +90,14 @@ fun MainScreen(modifier: Modifier = Modifier, viewModel: MainScreenViewModel = h
         AnimatedVisibility(visible = uiState.screenType == ScreenType.LOGIN) {
 
             val passwordError =
-                if (uiState.passwordError != null) uiState.passwordError?.getErrorMessage(context = context) else null
+                if (uiState.passwordError != null) stringResource(
+                    id = uiState.passwordError?.errorText ?: 0
+                ) else null
 
             val emailError =
-                if (uiState.emailError != null) uiState.emailError?.getErrorMessage(context = context) else null
+                if (uiState.emailError != null) stringResource(
+                    id = uiState.emailError?.errorText ?: 0
+                ) else null
 
             LoginScreen(
                 email = uiState.email,
