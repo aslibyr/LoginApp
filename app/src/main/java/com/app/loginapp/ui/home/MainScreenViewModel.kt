@@ -28,7 +28,12 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
 
             is MainScreenUIEvents.ChangeScreenType -> {
                 if (event.screenType == ScreenType.ONBOARDING) {
-                    _uiState.value = _uiState.value.copy(email = "", password = "")
+                    _uiState.value = _uiState.value.copy(
+                        email = "",
+                        emailError = null,
+                        password = "",
+                        passwordError = null
+                    )
                 }
                 _uiState.value = _uiState.value.copy(screenType = event.screenType)
             }
@@ -43,19 +48,19 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    private fun validateEmail(): String? {
+    private fun validateEmail(): ErrorType? {
         if (_uiState.value.email.isEmpty()) {
-            return "E-posta boş olamaz."
+            return ErrorType.EMPTY_EMAIL
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(_uiState.value.email).matches()) {
-            return "Lütfen geçerli bir e-posta giriniz."
+            return ErrorType.INCOMPATIBLE_EMAIL
         }
         return null
     }
 
-    private fun validatePassword(): String? {
+    private fun validatePassword(): ErrorType? {
         if (_uiState.value.password.isEmpty()) {
-            return "Şifre boş olamaz."
+            return ErrorType.EMPTY_PASSWORD
         }
         return null
     }
@@ -67,7 +72,7 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
             mailValidation,
             passwordValidation,
         ).any {
-            !it.isNullOrEmpty()
+            it != null
         }
         if (hasError) {
             _uiState.value =

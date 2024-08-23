@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">LoginApp</string>
+    <string name="welcome_text">Hoşgeldiniz</string>
+    <string name="restart_text">Baştan başla</string>
+    <string name="next">Geç</string>
+    <string name="onboarding_first_message">Keşfetmeye Hazır mısın?</string>
+    <string name="onboarding_second_message">İhtiyacın olan her şey bir tık uzağında.</string>
+    <string name="login_title_text">Haydi, Başlayalım!</string>
+    <string name="email">Email</string>
+    <string name="password">Şifre</string>
+    <string name="no_account">"Hesabın yok mu? "</string>
+    <string name="create_account">Hesap Oluştur</string>
+    <string name="empty_email">E-mail boş olamaz</string>
+    <string name="empty_password">Şifre boş olamaz</string>
+    <string name="incompatible_email">Lütfen geçerli bir e-mail giriniz</string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,13 +31,13 @@ fun LoginSuccessScreen(modifier: Modifier = Modifier, onRestartClicked: () -> Un
             modifier.padding(32.dp), alignment = Alignment.Center
         )
         Text(
-            text = "Giriş Başarılı",
+            text = stringResource(R.string.welcome_text),
             fontSize = 18.sp,
             fontWeight = FontWeight.SemiBold
         )
 
         CustomButton(
-            buttonText = "Baştan başla",
+            buttonText = stringResource(R.string.restart_text),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),

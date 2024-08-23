@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -81,7 +82,7 @@ fun LoginScreen(
                 .padding(top = 32.dp),
         )
         Text(
-            text = "Haydi, Başlayalım!",
+            text = stringResource(R.string.login_title_text),
             fontWeight = FontWeight.W900,
             fontSize = 20.sp,
             modifier = Modifier.padding(16.dp)
@@ -108,7 +109,7 @@ fun LoginScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
                         .padding(top = 16.dp),
-                    label = "Email",
+                    label = stringResource(R.string.email),
                     text = email,
                     returnText = { input ->
                         updateEmail.invoke(input)
@@ -125,7 +126,7 @@ fun LoginScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    label = "Şifre",
+                    label = stringResource(R.string.password),
                     text = password,
                     returnText = { input ->
                         updatePassword.invoke(input)
@@ -151,14 +152,14 @@ fun LoginScreen(
                     verticalAlignment = Alignment.Bottom
                 ) {
                     Text(
-                        text = "Hesabın yok mu? ",
+                        text = stringResource(R.string.no_account),
                         color = Color.Gray,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Normal,
                     )
 
                     Text(
-                        text = "Hesap Oluştur",
+                        text = stringResource(R.string.create_account),
                         color = Purple,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold,
