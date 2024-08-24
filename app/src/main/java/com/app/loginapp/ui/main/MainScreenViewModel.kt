@@ -1,9 +1,9 @@
-package com.app.loginapp.ui.home
+package com.app.loginapp.ui.main
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.loginapp.data.User
+import com.app.loginapp.data.UserEntity
 import com.app.loginapp.data.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +31,7 @@ class MainScreenViewModel @Inject constructor(private val userRepository: UserRe
             }
 
             is MainScreenUIEvents.ChangeScreenType -> {
-                if (event.screenType == ScreenType.ONBOARDING) {
+                if (event.screenType == ScreenType.ONBOARDING || event.screenType == ScreenType.REGISTER) {
                     _uiState.value = _uiState.value.copy(
                         email = "",
                         emailError = null,
@@ -47,7 +47,11 @@ class MainScreenViewModel @Inject constructor(private val userRepository: UserRe
             }
 
             MainScreenUIEvents.OnLoginClicked -> {
-                checkValidationForLogin()
+                checkValidationForAction(isLogin = true)
+            }
+
+            is MainScreenUIEvents.OnRegisterClicked -> {
+                checkValidationForAction(isLogin = false)
             }
         }
     }
@@ -69,7 +73,7 @@ class MainScreenViewModel @Inject constructor(private val userRepository: UserRe
         return null
     }
 
-    private fun checkValidationForLogin() {
+    private fun checkValidationForAction(isLogin: Boolean) {
         val mailValidation = validateEmail()
         val passwordValidation = validatePassword()
         val hasError = listOf(
@@ -83,24 +87,53 @@ class MainScreenViewModel @Inject constructor(private val userRepository: UserRe
                 _uiState.value.copy(emailError = mailValidation, passwordError = passwordValidation)
             return
         }
-        _uiState.value = _uiState.value.copy(
-            emailError = null,
-            passwordError = null,
-            screenType = ScreenType.SUCCESS
-        )
-    }
-
-    fun registerUser(email: String, password: String, username: String) {
-        viewModelScope.launch {
-            if (!userRepository.checkIfUserExists(email)) {
-                val newUser = User(email = email, password = password)
-                userRepository.registerUser(newUser)
-                // Kayıt başarılı
-            } else {
-                // Hata mesajı: Bu email zaten kayıtlı
-            }
+        if (isLogin) {
+            loginUser()
+        } else {
+            registerUser()
         }
     }
 
+    private fun registerUser() {
+        val email = _uiState.value.email
+        val password = _uiState.value.password
+        viewModelScope.launch {
+            val existingUser = userRepository.getUserByEmail(email)
+            if (existingUser != null) {
+                _uiState.value = _uiState.value.copy(
+                    emailError = ErrorType.EMAIL_ALREADY_EXISTS,
+                    passwordError = null
+                )
+                return@launch
+            }
 
+            val user = UserEntity(email = email, password = password)
+            userRepository.insertUser(user)
+
+            _uiState.value = _uiState.value.copy(
+                screenType = ScreenType.SUCCESS
+            )
+        }
+    }
+
+    private fun loginUser() {
+        viewModelScope.launch {
+            val user = userRepository.getUserByEmailAndPassword(
+                _uiState.value.email,
+                _uiState.value.password
+            )
+            if (user != null) {
+                _uiState.value = _uiState.value.copy(
+                    emailError = null,
+                    passwordError = null,
+                    screenType = ScreenType.SUCCESS
+                )
+            } else {
+                _uiState.value = _uiState.value.copy(
+                    emailError = ErrorType.INCOMPATIBLE_EMAIL,
+                    passwordError = ErrorType.EMPTY_PASSWORD
+                )
+            }
+        }
+    }
 }

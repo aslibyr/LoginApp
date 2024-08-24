@@ -51,9 +51,10 @@ fun RegisterScreen(
     updateEmail: (String) -> Unit,
     password: String,
     updatePassword: (String) -> Unit,
-    onLoginClicked: () -> Unit,
+    goToLoginClicked: () -> Unit,
     mailError: String? = null,
-    passwordError: String? = null
+    passwordError: String? = null,
+    onRegisterClicked: () -> Unit
 ) {
     var isLoaded by remember {
         mutableStateOf(
@@ -83,7 +84,7 @@ fun RegisterScreen(
                 .padding(top = 32.dp),
         )
         Text(
-            text = stringResource(R.string.login_title_text),
+            text = stringResource(R.string.join_us),
             fontWeight = FontWeight.W900,
             fontSize = 20.sp,
             modifier = Modifier.padding(16.dp)
@@ -132,7 +133,7 @@ fun RegisterScreen(
                     returnText = { input ->
                         updatePassword.invoke(input)
                     },
-                    onImeClicked = { onLoginClicked.invoke() },
+                    onImeClicked = { goToLoginClicked.invoke() },
                     keyboardOptions = KeyboardOptions.Default.copy(
                         imeAction = ImeAction.Done
                     ),
@@ -142,8 +143,8 @@ fun RegisterScreen(
                 )
 
                 CustomButton(modifier.padding(horizontal = 16.dp), onClick = {
-                    onLoginClicked.invoke()
-                }, buttonText = R.string.create_account.toString())
+                    onRegisterClicked.invoke()
+                }, buttonText = stringResource(R.string.signup))
 
                 Row(
                     modifier
@@ -153,13 +154,19 @@ fun RegisterScreen(
                     verticalAlignment = Alignment.Bottom
                 ) {
                     Text(
+                        text = "Zaten bir hesabın var mı? ",
+                        color = Color.Gray,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Normal,
+                    )
+                    Text(
                         text = stringResource(R.string.login),
                         color = Purple,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.clickable {
-
+                            goToLoginClicked()
                         }
                     )
                 }

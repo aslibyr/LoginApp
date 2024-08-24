@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.app.loginapp.theme.LoginAppTheme
-import com.app.loginapp.ui.home.MainScreen
+import com.app.loginapp.ui.main.MainScreen
 import com.app.loginapp.utils.hideStatusBarPadding
 import dagger.hilt.android.AndroidEntryPoint
 

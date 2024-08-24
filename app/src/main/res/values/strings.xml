@@ -13,5 +13,8 @@
     <string name="empty_email">E-mail boş olamaz</string>
     <string name="empty_password">Şifre boş olamaz</string>
     <string name="incompatible_email">Lütfen geçerli bir e-mail giriniz</string>
-    <string name="login">Giriş yap</string>
+    <string name="login">Giriş Yap</string>
+    <string name="join_us">Bize katıl!</string>
+    <string name="email_already_exists">"Bu E-posta zaten mevcut "</string>
+    <string name="signup">Hesap Oluştur</string>
 </resources>

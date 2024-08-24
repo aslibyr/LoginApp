@@ -1,4 +1,4 @@
-package com.app.loginapp.ui.home
+package com.app.loginapp.ui.main
 
 import com.app.loginapp.R
 
@@ -11,6 +11,8 @@ sealed class MainScreenUIEvents {
     data class ChangeScreenType(val screenType: ScreenType) : MainScreenUIEvents()
 
     data object OnLoginClicked : MainScreenUIEvents()
+
+    data class OnRegisterClicked(val email: String, val password: String) : MainScreenUIEvents()
 }
 
 data class MainScreenUIStateModel(
@@ -29,5 +31,6 @@ enum class ScreenType {
 enum class ErrorType(val errorText: Int) {
     EMPTY_PASSWORD(errorText = R.string.empty_password),
     INCOMPATIBLE_EMAIL(errorText = R.string.incompatible_email),
-    EMPTY_EMAIL(errorText = R.string.empty_email)
+    EMPTY_EMAIL(errorText = R.string.empty_email),
+    EMAIL_ALREADY_EXISTS(errorText = R.string.email_already_exists)
 }

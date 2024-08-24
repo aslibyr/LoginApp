@@ -1,11 +1,19 @@
 package com.app.loginapp.data
 
-class UserRepository(private val userDao: UserDao) {
-    suspend fun registerUser(user: User) {
-        return userDao.insertUser(user)
+import javax.inject.Inject
+
+class UserRepository @Inject constructor(private val userDao: UserDao) {
+
+    suspend fun insertUser(user: UserEntity) {
+        userDao.insertUser(user)
     }
 
-    suspend fun checkIfUserExists(email: String): Boolean {
-        return userDao.getUserByEmail(email) != null
+    // Login
+    suspend fun getUserByEmailAndPassword(email: String, password: String): UserEntity? {
+        return userDao.getUser(email, password)
+    }
+
+    suspend fun getUserByEmail(email: String): UserEntity? {
+        return userDao.getUserByEmail(email)
     }
 }

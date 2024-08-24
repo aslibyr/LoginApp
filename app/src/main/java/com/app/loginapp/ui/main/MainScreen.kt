@@ -1,4 +1,4 @@
-package com.app.loginapp.ui.home
+package com.app.loginapp.ui.main
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
@@ -138,12 +138,52 @@ fun MainScreen(modifier: Modifier = Modifier, viewModel: MainScreenViewModel = h
             })
         }
         AnimatedVisibility(visible = uiState.screenType == ScreenType.REGISTER) {
+
+            val passwordError =
+                if (uiState.passwordError != null) stringResource(
+                    id = uiState.passwordError?.errorText ?: 0
+                ) else null
+
+            val emailError =
+                if (uiState.emailError != null) stringResource(
+                    id = uiState.emailError?.errorText ?: 0
+                ) else null
+
             RegisterScreen(
-                email =,
-                updateEmail =,
-                password =,
-                updatePassword =,
-                onLoginClicked = { /*TODO*/ })
+                email = uiState.email,
+                updateEmail = {
+                    viewModel.updateUIEvents(
+                        event = MainScreenUIEvents.UpdateEmail(
+                            email = it
+                        )
+                    )
+                },
+                password = uiState.password,
+                updatePassword = {
+                    viewModel.updateUIEvents(
+                        event = MainScreenUIEvents.UpdatePassword(
+                            password = it
+                        )
+                    )
+                },
+                onRegisterClicked = {
+                    viewModel.updateUIEvents(
+                        event = MainScreenUIEvents.OnRegisterClicked(
+                            email = uiState.email,
+                            password = uiState.password
+                        )
+                    )
+                },
+                goToLoginClicked = {
+                    viewModel.updateUIEvents(
+                        event = MainScreenUIEvents.ChangeScreenType(
+                            screenType = ScreenType.LOGIN
+                        )
+                    )
+                },
+                mailError = emailError,
+                passwordError = passwordError
+            )
         }
     }
 }

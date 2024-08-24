@@ -18,6 +18,9 @@ lifecycleRuntimeComposeAndroid = "2.8.4"
 lifecycleRuntimeComposeDesktop = "2.8.4"
 roomCommon = "2.6.1"
 roomCompiler = "2.6.1"
+roomCompilerVersion = "2.5.0"
+roomKtx = "2.6.1"
+roomRuntime = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,6 +28,8 @@ androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-com
 androidx-lifecycle-runtime-ktx-v270 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+androidx-room-compiler-v250 = { module = "androidx.room:room-compiler", version.ref = "roomCompilerVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltCompiler" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -46,6 +51,7 @@ androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", nam
 androidx-lifecycle-runtime-compose-desktop = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-desktop", version.ref = "lifecycleRuntimeComposeDesktop" }
 androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

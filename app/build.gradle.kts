@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -49,15 +50,25 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
     // hilt
     implementation(libs.hilt.android)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
-    implementation(libs.androidx.room.common)
     kapt(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+
+    //room
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
 
     //navigation
     implementation(libs.androidx.navigation.compose)
