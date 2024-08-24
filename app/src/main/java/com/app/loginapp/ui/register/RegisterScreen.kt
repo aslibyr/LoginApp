@@ -1,4 +1,4 @@
-package com.app.loginapp.ui.login
+package com.app.loginapp.ui.register
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -45,7 +45,7 @@ import com.app.loginapp.theme.Purple
 import kotlinx.coroutines.delay
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     modifier: Modifier = Modifier,
     email: String,
     updateEmail: (String) -> Unit,
@@ -53,8 +53,7 @@ fun LoginScreen(
     updatePassword: (String) -> Unit,
     onLoginClicked: () -> Unit,
     mailError: String? = null,
-    passwordError: String? = null,
-    onCreateAccountClicked: () -> Unit
+    passwordError: String? = null
 ) {
     var isLoaded by remember {
         mutableStateOf(
@@ -144,7 +143,7 @@ fun LoginScreen(
 
                 CustomButton(modifier.padding(horizontal = 16.dp), onClick = {
                     onLoginClicked.invoke()
-                }, buttonText = stringResource(R.string.login))
+                }, buttonText = R.string.create_account.toString())
 
                 Row(
                     modifier
@@ -154,22 +153,14 @@ fun LoginScreen(
                     verticalAlignment = Alignment.Bottom
                 ) {
                     Text(
-                        text = stringResource(R.string.no_account),
-                        color = Color.Gray,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Normal,
-                    )
-
-                    Text(
-                        text = stringResource(R.string.create_account),
+                        text = stringResource(R.string.login),
                         color = Purple,
                         fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .clickable {
-                                onCreateAccountClicked.invoke()
-                            }
+                        modifier = Modifier.clickable {
+
+                        }
                     )
                 }
             }

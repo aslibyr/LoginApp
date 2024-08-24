@@ -21,6 +21,7 @@ import com.app.loginapp.theme.Purple
 import com.app.loginapp.ui.login.LoginScreen
 import com.app.loginapp.ui.onboarding.OnboardingScreen
 import com.app.loginapp.ui.onboarding.PagerModel
+import com.app.loginapp.ui.register.RegisterScreen
 import com.app.loginapp.ui.success.LoginSuccessScreen
 import kotlinx.coroutines.launch
 
@@ -118,7 +119,14 @@ fun MainScreen(modifier: Modifier = Modifier, viewModel: MainScreenViewModel = h
                 },
                 onLoginClicked = { viewModel.updateUIEvents(event = MainScreenUIEvents.OnLoginClicked) },
                 passwordError = passwordError,
-                mailError = emailError
+                mailError = emailError,
+                onCreateAccountClicked = {
+                    viewModel.updateUIEvents(
+                        event = MainScreenUIEvents.ChangeScreenType(
+                            screenType = ScreenType.REGISTER
+                        )
+                    )
+                }
             )
         }
         AnimatedVisibility(visible = uiState.screenType == ScreenType.SUCCESS) {
@@ -128,6 +136,14 @@ fun MainScreen(modifier: Modifier = Modifier, viewModel: MainScreenViewModel = h
                     pagerState.animateScrollToPage(0)
                 }
             })
+        }
+        AnimatedVisibility(visible = uiState.screenType == ScreenType.REGISTER) {
+            RegisterScreen(
+                email =,
+                updateEmail =,
+                password =,
+                updatePassword =,
+                onLoginClicked = { /*TODO*/ })
         }
     }
 }

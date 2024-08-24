@@ -23,7 +23,7 @@ data class MainScreenUIStateModel(
 )
 
 enum class ScreenType {
-    ONBOARDING, LOGIN, SUCCESS
+    ONBOARDING, LOGIN, SUCCESS, REGISTER
 }
 
 enum class ErrorType(val errorText: Int) {

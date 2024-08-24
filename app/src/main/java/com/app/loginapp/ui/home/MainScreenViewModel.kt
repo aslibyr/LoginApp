@@ -3,15 +3,19 @@ package com.app.loginapp.ui.home
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.loginapp.data.User
+import com.app.loginapp.data.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainScreenViewModel @Inject constructor() : ViewModel() {
+class MainScreenViewModel @Inject constructor(private val userRepository: UserRepository) :
+    ViewModel() {
 
     private val _uiState = MutableStateFlow(MainScreenUIStateModel())
     val uiState: StateFlow<MainScreenUIStateModel>
@@ -85,4 +89,18 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
             screenType = ScreenType.SUCCESS
         )
     }
+
+    fun registerUser(email: String, password: String, username: String) {
+        viewModelScope.launch {
+            if (!userRepository.checkIfUserExists(email)) {
+                val newUser = User(email = email, password = password)
+                userRepository.registerUser(newUser)
+                // Kayıt başarılı
+            } else {
+                // Hata mesajı: Bu email zaten kayıtlı
+            }
+        }
+    }
+
+
 }
